@@ -44,8 +44,6 @@ const App = (props) => {
     const token = window.localStorage.getItem("jwt");
     if (token) {
       const decoded_jwt = jwt(token);
-      console.log(decoded_jwt.exp * 1000)
-      console.log(Date.now())
       if (decoded_jwt.exp * 1000 < Date.now()) {
         window.localStorage.removeItem("jwt");
         window.location.replace("/login")
