@@ -12,7 +12,6 @@ import ProfileFavorites from "./ProfileFavorites";
 import Register from "./Register";
 import Settings from "./Settings";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import jwt from 'jwt-decode'
 
 const mapStateToProps = (state) => {
   return {
@@ -43,13 +42,7 @@ const App = (props) => {
   useEffect(() => {
     const token = window.localStorage.getItem("jwt");
     if (token) {
-      const decoded_jwt = jwt(token);
-      if (decoded_jwt.exp * 1000 < Date.now()) {
-        window.localStorage.removeItem("jwt");
-        window.location.replace("/login")
-      } else {
-        agent.setToken(token);
-      }
+      agent.setToken(token);
     }
     onLoad(token ? agent.Auth.current() : null, token);
   }, [onLoad]);
