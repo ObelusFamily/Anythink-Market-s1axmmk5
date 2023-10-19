@@ -12,6 +12,13 @@ const SettingsForm = ({ currentUser, onSubmitForm }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
+    const token = window.localStorage.getItem("jwt");
+    if (!token) {
+        window.location.replace("/login")
+      }
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       setUser(currentUser);
     }
